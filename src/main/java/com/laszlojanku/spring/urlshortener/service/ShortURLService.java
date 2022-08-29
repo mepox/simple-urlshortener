@@ -23,7 +23,7 @@ public class ShortURLService {
 	private ShortURLRepository repository;	
 	
 	@Autowired
-	public ShortURLService(JdbcShortURLRepository repository, KeyGeneratorService keyGeneratorService) {
+	public ShortURLService(JdbcShortURLRepository repository, SimpleKeyGeneratorService keyGeneratorService) {
 		this.repository = repository;
 		this.keyGeneratorService = keyGeneratorService;
 		
