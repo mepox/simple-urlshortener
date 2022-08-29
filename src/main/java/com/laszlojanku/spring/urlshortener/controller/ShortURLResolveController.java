@@ -28,11 +28,11 @@ public class ShortURLResolveController {
 	 * @return		returns the original url or an error message
 	 */	
 	@GetMapping("/u/{key}")
-	public ResponseEntity<String> getURL(@PathVariable("key") int key) {
+	public ResponseEntity<String> getURL(@PathVariable("key") String strKey) {
 		String url = "";
 		
 		try {
-			url = shortURLService.getUrl(key);
+			url = shortURLService.getUrl(strKey);
 		} catch (Exception e) {
 			return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
 		}

@@ -44,6 +44,7 @@ public class ShortURLService {
 	 * @throws			Exception if something went wrong
 	 */	
 	public void deleteURL(String strKey) throws Exception {
+		// First validate the key as we need an Integer
 		int key = 0;
 		
 		try {
@@ -88,7 +89,16 @@ public class ShortURLService {
 	 * @return	url	the URL or returns null if not found
 	 * @throws		Exception if something went wrong
 	 */	
-	public String getUrl(int key) throws Exception {
+	public String getUrl(String strKey) throws Exception {
+		// First validate the key as we need an Integer
+		int key = 0;
+		
+		try {
+			key = Integer.parseInt(strKey);
+		} catch (NumberFormatException e) {
+			throw new Exception("Key is not valid.");
+		}
+		
 		ShortURL shortURL;
 		
 		try {
@@ -131,23 +141,6 @@ public class ShortURLService {
 		
 		// Everything went OK, return the key
 		return key;
-	}
-	
-	/**
-	 * Check if a key exists in the database.	
-	 * @param	key	the key to check
-	 * @return		true if the key exists
-	 * @throws		Exception if something went wrong 
-	 */
-	public boolean isKeyExists(int key) throws Exception {
-		String url = "";
-		
-		try {
-			url = getUrl(key);
-		} catch (DataAccessException e) {
-			throw new Exception("Database error.");
-		}
-		
-		return (url != null) ? true : false; 		
-	}
+	}	
+
 }
