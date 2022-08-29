@@ -1,6 +1,6 @@
 # A simple URL Shortener
 
-This is a small hobby project to create an URL Shortener service using Spring Boot. It uses an in-memory database (H2) to store the data.
+This is a small hobby project to create an URL Shortener service using Spring Boot.
 
 ![Alt text](screenshot.jpg?raw=true "URL Shortener")
 
@@ -10,7 +10,9 @@ The project is created with Maven, so you just need to import it to your IDE and
 ## Live Preview
 The app is hosted on Heroku: https://spring-urlshortener.herokuapp.com/
 
-## To view your H2 in-memory database
+## Data storage
+It uses an in-memory database (H2) to store the data.
+
 To view and query the database you can browse to */console*, eg.: http://localhost:8080/console
 
 Login details:
@@ -22,6 +24,15 @@ spring.datasource.password=admin
 ```
 
 # How it works
+
+## Models
+Represent an object in the application.
+
+### ShortURL.java
+Represent a ShortURL.
+
+- int key - the key of the ShortURL
+- String url - the url of the ShortURL
 
 ## Controllers
 They are responsible to handle the client REST requests.
@@ -74,12 +85,3 @@ Repository that uses an in-memory (H2) database with JdbcTemplate to store the d
 
 ### ArrayListShortURLRepository.java
 Repository that uses an ArrayList to store the data. Used for prototyping only.
-
-## Models
-Represent an object in the application.
-
-### ShortURL.java
-Represent a ShortURL.
-
-- int key - the key of the ShortURL
-- String url - the url of the ShortURL
