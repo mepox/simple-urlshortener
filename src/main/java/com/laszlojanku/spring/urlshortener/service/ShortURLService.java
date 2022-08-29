@@ -89,7 +89,7 @@ public class ShortURLService {
 	 * @return	url	the URL or returns null if not found
 	 * @throws		Exception if something went wrong
 	 */	
-	public String getUrl(String strKey) throws Exception {
+	public String getURL(String strKey) throws Exception {
 		// First validate the key as we need an Integer
 		int key = 0;
 		

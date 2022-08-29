@@ -32,7 +32,7 @@ public class ShortURLResolveController {
 		String url = "";
 		
 		try {
-			url = shortURLService.getUrl(strKey);
+			url = shortURLService.getURL(strKey);
 		} catch (Exception e) {
 			return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
 		}
