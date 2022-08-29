@@ -24,10 +24,10 @@ spring.datasource.password=admin
 # How it works
 
 ## Controllers
-They are responsible to handle the client REST calls.
+They are responsible to handle the client REST requests.
 
 ### HomeController.java
-Responsible to handle the main page's REST calls.
+Responsible to handle the main page's REST requests.
 
 - GET request to ```/urls/all``` to retrieve the list of the urls in JSON String.
 - POST request to ```/urls/add``` to add a new url. The request body contains the new url as a String.
