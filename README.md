@@ -49,4 +49,4 @@ Provides a service to manipulate the ShortURLs.
 ### SimpleKeyGeneratorService.java
 A simple key generator that generates a key for an url.
 
--. getKey() returns a key
+- .getKey() returns a key
