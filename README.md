@@ -8,7 +8,7 @@ This is a small hobby project to create an URL Shortener service using Spring Bo
 The project is created with Maven, so you just need to import it to your IDE and build the project to resolve the dependencies.
 
 ## To view your H2 in-memory database
-To view and query the database you can browse to http://localhost:8080/console
+To view and query the database you can browse to */console*, eg.: http://localhost:8080/console
 
 Login details:
 ```
