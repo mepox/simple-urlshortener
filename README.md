@@ -34,3 +34,19 @@ Responsible to handle the main page's REST calls.
 Responsible to resolve a ShortURL using a key.
 
 - GET request to ```/u/{key}``` resolves the ShortURL and send back a ```HttpStatus.MOVED_PERMANENTLY``` which redirects the browser to the original URL.
+
+## Services
+They are responsible to provide a service to our application.
+
+### ShortURLService.java
+Provides a service to manipulate the ShortURLs.
+
+- .addURL(String) adds a new url to the repository after validation.
+- .deleteURL(String) deletes an url from the repository.
+- .getURL(String) retrieves an url from the repository.
+- .getAll() retrieves a List of all urls from the repository.
+
+### SimpleKeyGeneratorService.java
+A simple key generator that generates a key for an url.
+
+-. getKey() returns a key
