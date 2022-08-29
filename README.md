@@ -17,3 +17,20 @@ spring.datasource.driverClassName=org.h2.Driver
 spring.datasource.username=admin
 spring.datasource.password=admin
 ```
+
+# How it works
+
+## Controllers
+They are responsible to handle the client REST calls.
+
+### HomeController.java
+Responsible to handle the main page's REST calls.
+
+- GET request to ```/urls/all``` to retrieve the list of the urls in JSON String.
+- POST request to ```/urls/add``` to add a new url. The request body contains the new url as a String.
+- DELETE request to ```/urls/delete/{key}``` to delete an url by it's key.
+
+### ShortURLResolveController.java
+Responsible to resolve a ShortURL using a key.
+
+- GET request to ```/u/{key}``` resolves the ShortURL and send back a ```HttpStatus.MOVED_PERMANENTLY``` which redirects the browser to the original URL.
