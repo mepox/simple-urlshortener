@@ -7,6 +7,9 @@ This is a small hobby project to create an URL Shortener service using Spring Bo
 ## Installation 
 The project is created with Maven, so you just need to import it to your IDE and build the project to resolve the dependencies.
 
+## Live Preview
+The app is hosted on Heroku: https://spring-urlshortener.herokuapp.com/
+
 ## To view your H2 in-memory database
 To view and query the database you can browse to */console*, eg.: http://localhost:8080/console
 
