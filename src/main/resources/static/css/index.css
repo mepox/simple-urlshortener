@@ -1,0 +1,51 @@
+.center {
+	text-align: center;
+}
+
+table {
+	margin-left: auto;
+	margin-right: auto;
+	width: 50%;
+}
+
+td {
+	text-align: center;
+}
+
+#shortenButton {
+	background-color: dodgerblue;
+	color: white;
+	border: 1px solid black;
+	border-radius: 4px;
+	font-size: 14px;
+	padding: 5px 15px;	
+}
+
+#shortenButton:hover {
+	background-color: darkblue;
+}
+
+.rowButton {
+	border: 1px solid black;
+	border-radius: 4px;
+	font-size: 12px;
+	padding: 3px 13px;
+}
+
+.deleteButton {
+	background-color: red;
+	color: white;
+}
+
+.deleteButton:hover {
+	background-color: darkred;
+}
+
+.copyButton {
+	background-color: lightgreen;
+	color: black;	
+}
+
+.copyButton:hover {
+	background-color: green;
+}

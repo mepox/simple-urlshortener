@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>URL Shortener - Home</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/index.css">    
+    <script src="js/index.js"></script>
+</head>
+<body>
+<h1 class="center">URL Shortener</h1>
+<div class="center">
+	<form id="addURLForm" action="javascript:addURL()">
+		<input type="text" name="newURL" placeholder="Shorten your link (e.g. http://www.google.com)" style="width:50%" autofocus>
+		<input type="submit" id="shortenButton" value="Shorten">
+	</form>
+	<p id="statusText"></p>
+</div>
+<div>
+	<table id="URLTable">		
+		<thead>
+			<th>Original URL</th>
+			<th>Short URL</th>
+			<th>Actions</th>
+		</thead>
+		<tbody>
+		</tbody>		
+	</table>
+</div>
+
+<script>onStart();</script>
+</body>
+
+</html>
