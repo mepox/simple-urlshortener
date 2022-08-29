@@ -46,7 +46,28 @@ Provides a service to manipulate the ShortURLs.
 - .getURL(String) retrieves an url from the repository.
 - .getAll() retrieves a List of all urls from the repository.
 
+### KeyGeneratorService.java (interface)
+Interface for the KeyGeneratorService(s).
+
+- .getKey() returns a key
+
 ### SimpleKeyGeneratorService.java
 A simple key generator that generates a key for an url.
 
-- .getKey() returns a key
+## Repositories
+They are responsible for database operations.
+
+### ShortURLRepository.java (interface)
+Interface for the Repositories.
+
+- .add(ShortURL)
+- .delete(int)
+- .getAll()
+- .getShortURL(int)
+- .isExists(int)
+
+### JdbcShortURLRepository.java
+Repository that uses an in-memory (H2) database with JdbcTemplate to store the data.
+
+### ArrayListShortURLRepository.java
+Repository that uses an ArrayList to store the data. Used for prototyping only.
