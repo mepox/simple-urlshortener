@@ -52,7 +52,7 @@ Interface for the KeyGeneratorService(s).
 - .getKey() returns a key
 
 ### SimpleKeyGeneratorService.java
-A simple key generator that generates a key for an url.
+A simple key generator that generates a key for an url. Right now it's only returns a number starting from 1000.
 
 ## Repositories
 They are responsible for database operations.
@@ -60,14 +60,23 @@ They are responsible for database operations.
 ### ShortURLRepository.java (interface)
 Interface for the Repositories.
 
-- .add(ShortURL)
-- .delete(int)
-- .getAll()
-- .getShortURL(int)
-- .isExists(int)
+- .add(ShortURL) adds a ShortURL
+- .delete(int) delete a ShortURL
+- .getAll() retrieves a ShortURL
+- .getShortURL(int) retrieves a List of all ShortURLs
+- .isExists(int) checks if a ShortURL exists
 
 ### JdbcShortURLRepository.java
 Repository that uses an in-memory (H2) database with JdbcTemplate to store the data.
 
 ### ArrayListShortURLRepository.java
 Repository that uses an ArrayList to store the data. Used for prototyping only.
+
+## Models
+Represent an object in our application.
+
+### ShortURL.java
+Represent a ShortURL.
+
+- int key - the key of the ShortURL
+- String url - the url of the ShortURL
