@@ -39,7 +39,7 @@ Responsible to resolve a ShortURL using a key.
 - GET request to ```/u/{key}``` resolves the ShortURL and send back a ```HttpStatus.MOVED_PERMANENTLY``` which redirects the browser to the original URL.
 
 ## Services
-They are responsible to provide a service to our application.
+They are responsible to provide a service to the application.
 
 ### ShortURLService.java
 Provides a service to manipulate the ShortURLs.
@@ -76,7 +76,7 @@ Repository that uses an in-memory (H2) database with JdbcTemplate to store the d
 Repository that uses an ArrayList to store the data. Used for prototyping only.
 
 ## Models
-Represent an object in our application.
+Represent an object in the application.
 
 ### ShortURL.java
 Represent a ShortURL.
