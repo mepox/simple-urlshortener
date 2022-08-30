@@ -4,6 +4,9 @@ import java.util.List;
 
 import com.laszlojanku.spring.urlshortener.model.ShortURL;
 
+/**
+ * Interface for the ShortURLRepositories
+ */
 public interface ShortURLRepository {
 	
 	public void add(ShortURL shortURL);

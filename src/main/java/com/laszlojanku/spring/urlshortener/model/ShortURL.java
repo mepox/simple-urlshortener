@@ -22,7 +22,7 @@ public class ShortURL {
 	}
 	
 	/**
-	 * Returns this class fields in a JSON String
+	 * Returns the class's fields in a JSON String
 	 * @return	JSON String
 	 */
 	@Override

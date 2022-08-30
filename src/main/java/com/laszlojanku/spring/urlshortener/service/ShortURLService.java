@@ -13,7 +13,7 @@ import com.laszlojanku.spring.urlshortener.repository.JdbcShortURLRepository;
 import com.laszlojanku.spring.urlshortener.repository.ShortURLRepository;
 
 /** 
- * Provides a Service to manipulate the ShortURLs in the database.
+ * Provides a Service to manipulate the ShortURLs.
  */
 
 @Service

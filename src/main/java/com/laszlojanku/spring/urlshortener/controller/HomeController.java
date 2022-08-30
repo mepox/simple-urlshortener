@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.laszlojanku.spring.urlshortener.service.ShortURLService;
 
 /**
- * HomeController handles the main page's REST calls.
+ * Responsible to handle the main page's REST API requests.
  */
 
 @RestController
@@ -23,7 +23,7 @@ public class HomeController {
 	private ShortURLService shortURLService;
 	
 	/**
-	 * Handles the client call to add a new url.	
+	 * Handles the client POST requests to add a new url.	
 	 * @param url	the new url to be added
 	 * @return 		the key for the new url or an error message
 	 */
@@ -40,7 +40,7 @@ public class HomeController {
 	}
 	
 	/**
-	 * Handles the client call to delete an url.
+	 * Handles the client DELETE requests to delete an url.
 	 * @param key	the key of the url to be deleted
 	 * @return		a status message with the result   
 	 */	
@@ -57,7 +57,7 @@ public class HomeController {
 	}
 	
 	/**
-	 * Handles the client call to get all the ShortURL.
+	 * Handles the client GET requests to get all the ShortURL.
 	 * 
 	 * @return	a list of all the ShortURL
 	 */
