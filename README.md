@@ -23,7 +23,7 @@ spring.datasource.username=admin
 spring.datasource.password=admin
 ```
 
-# How it works
+# Overview
 
 ## Models
 Represent an object in the application.
@@ -35,10 +35,10 @@ Represent a ShortURL.
 - String url - the url of the ShortURL
 
 ## Controllers
-They are responsible to handle the client REST requests.
+They are responsible to handle the client REST API requests.
 
 ### HomeController.java
-Responsible to handle the main page's REST requests.
+Responsible to handle the main page's REST API requests.
 
 - GET request to ```/urls/all``` to retrieve the list of the urls in JSON String.
 - POST request to ```/urls/add``` to add a new url. The request body contains the new url as a String.
