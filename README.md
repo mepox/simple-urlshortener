@@ -35,7 +35,7 @@ Represent a ShortURL.
 - String url - the url of the ShortURL
 
 ## Controllers
-They are responsible to handle the client REST API requests.
+They are responsible to handle the clients' REST API requests.
 
 ### HomeController.java
 Responsible to handle the main page's REST API requests.
