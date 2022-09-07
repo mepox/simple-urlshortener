@@ -4,6 +4,25 @@ A small hobby project to create an URL Shortener service using Spring Boot.
 
 ![Alt text](screenshot.jpg?raw=true "URL Shortener")
 
+## What's inside
+The project uses the following technologies:
+- Java 11
+- Spring Boot
+- HTML, CSS and JavaScript
+- Maven
+
+## Overview
+The service uses Controller - Service - Repository pattern:
+
+- Controllers: Handle the clients' REST API requests and pass them to the Services.
+- Services: Provide a service to the application. Receive input from Controllers, perform validation and business logic, and calling Repositories for data manipulation.
+- Repositories: Responsible to database operations.
+
+The main components of the service are:
+
+- TinyURLService: Provide a service to manipulate the TinyURLs.
+- SimpleKeyGeneratorServce: A placeholder that generate a key and return an Integer starting from 1000.
+
 ## Installation 
 The project is created with Maven, so you just need to import it to your IDE and build the project to resolve the dependencies.
 
@@ -23,65 +42,14 @@ spring.datasource.username=admin
 spring.datasource.password=admin
 ```
 
-# Overview
+## Endpoints
 
-## Models
-Represent an object in the application.
-
-### ShortURL.java
-Represent a ShortURL.
-
-- int key - the key of the ShortURL
-- String url - the url of the ShortURL
-
-## Controllers
-They are responsible to handle the clients' REST API requests.
-
-### HomeController.java
-Responsible to handle the main page's REST API requests.
+HomeController:
 
 - GET request to ```/urls/all``` to retrieve the list of the urls in JSON String.
 - POST request to ```/urls/add``` to add a new url. The request body contains the new url as a String.
 - DELETE request to ```/urls/delete/{key}``` to delete an url by it's key.
 
-### ShortURLResolveController.java
-Responsible to resolve a ShortURL using a key.
+TinyURLResolveController:
 
-- GET request to ```/u/{key}``` resolves the ShortURL and send back a ```HttpStatus.MOVED_PERMANENTLY``` which redirects the browser to the original URL.
-
-## Services
-They are responsible to provide a service to the application.
-
-### ShortURLService.java
-Provides a service to manipulate the ShortURLs.
-
-- .addURL(String) adds a new url to the repository after validation.
-- .deleteURL(String) deletes an url from the repository.
-- .getURL(String) retrieves an url from the repository.
-- .getAll() retrieves a List of all urls from the repository.
-
-### KeyGeneratorService.java (interface)
-Interface for the KeyGeneratorService(s).
-
-- .getKey() returns a key
-
-### SimpleKeyGeneratorService.java
-A simple key generator that generates a key for an url. Right now it's only returns a number starting from 1000.
-
-## Repositories
-They are responsible for database operations.
-
-### ShortURLRepository.java (interface)
-Interface for the Repositories.
-
-- .add(ShortURL) adds a ShortURL
-- .delete(int) delete a ShortURL
-- .getAll() retrieves a ShortURL
-- .getShortURL(int) retrieves a List of all ShortURLs
-- .isExists(int) checks if a ShortURL exists
-
-### JdbcShortURLRepository.java
-Repository that uses an in-memory (H2) database with JdbcTemplate to store the data.
-
-### ArrayListShortURLRepository.java
-Repository that uses an ArrayList to store the data. Used for prototyping only.
+- GET request to ```/u/{key}``` resolves a TinyURL and send back a ```HttpStatus.MOVED_PERMANENTLY``` which redirects the browser to the original URL.
