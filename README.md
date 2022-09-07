@@ -9,6 +9,7 @@ The project uses the following technologies:
 - Java 11
 - Spring Boot
 - HTML, CSS and JavaScript
+- SQL
 - Maven
 
 ## Overview
