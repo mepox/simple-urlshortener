@@ -10,21 +10,21 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.laszlojanku.spring.urlshortener.service.ShortURLService;
+import com.laszlojanku.spring.urlshortener.service.TinyURLService;
 
 /** 
- * REST Controller to resolve a ShortURL by key.
+ * REST Controller to resolve a TinyURL by key.
  */
 
 @RestController
-public class ShortURLResolveController {
+public class TinyURLResolveController {
 	
 	@Autowired
-	private ShortURLService shortURLService;
+	private TinyURLService tinyURLService;
 	
 	/**
-	 * Resolves a ShortURL using the key.
-	 * @param	key	the key of the ShortURL
+	 * Resolves a TinyURL using the key.
+	 * @param	key	the key of the TinyURL
 	 * @return		returns the original url or an error message
 	 */	
 	@GetMapping("/u/{key}")
@@ -32,7 +32,7 @@ public class ShortURLResolveController {
 		String url = "";
 		
 		try {
-			url = shortURLService.getURL(strKey);
+			url = tinyURLService.getURL(strKey);
 		} catch (Exception e) {
 			return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
 		}

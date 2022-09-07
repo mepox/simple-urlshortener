@@ -21,11 +21,11 @@ function showURLs() {
 	        		tbody.removeChild(tbody.firstChild);
 	        	}
 	        	
-	        	var shortURL = window.location + "u/";
+	        	var tinyURL = window.location + "u/";
 	        	
 	        	var toAdd = "";        	
 				for (var i = 0; i < data.length; i++) {
-					toAdd += "<tr><td>" + shortURL + data[i].key + "</td>" +				
+					toAdd += "<tr><td>" + tinyURL + data[i].key + "</td>" +				
 					"<td>" + data[i].url + "</td>" +
 					"<td><input type='button' class='copyButton rowButton' onclick='toClipboardRowButton(this)' value='Copy'> " +
 					"<input type='button' class='deleteButton rowButton' onclick='deleteURLRowButton(this)' value='Delete'></td></tr>";
@@ -61,9 +61,9 @@ function addURL() {
 	    if (this.readyState == XMLHttpRequest.DONE) {
 			if (this.status == 200) {
 				// SUCCESS
-				var shortURL = window.location + "u/" + this.responseText;
-				var copyButton = "<input type='button' class='copyButton rowButton' onclick=copyTextToClipboard('" + shortURL + "') value='Copy'>";				
-				var message = "New Short URL has been created: " + shortURL + " " + copyButton;
+				var tinyURL = window.location + "u/" + this.responseText;
+				var copyButton = "<input type='button' class='copyButton rowButton' onclick=copyTextToClipboard('" + tinyURL + "') value='Copy'>";				
+				var message = "New Short URL has been created: " + tinyURL + " " + copyButton;
 				
 				updateStatus(message);
 				showURLs();
@@ -115,10 +115,10 @@ function copyTextToClipboard(url) {
 }
 
 function toClipboardRowButton(row) {
-	var shortURL = row.parentNode.parentNode.childNodes[0].firstChild.nodeValue 
-	navigator.clipboard.writeText(shortURL);
+	var tinyURL = row.parentNode.parentNode.childNodes[0].firstChild.nodeValue 
+	navigator.clipboard.writeText(tinyURL);
 	
-	var message = shortURL + " copied to the clipboard.";	
+	var message = tinyURL + " copied to the clipboard.";	
 	updateStatus(message);
 }
 

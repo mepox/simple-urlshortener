@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.laszlojanku.spring.urlshortener.service.ShortURLService;
+import com.laszlojanku.spring.urlshortener.service.TinyURLService;
 
 /**
  * Responsible to handle the main page's REST API requests.
@@ -20,7 +20,7 @@ import com.laszlojanku.spring.urlshortener.service.ShortURLService;
 public class HomeController {
 	
 	@Autowired
-	private ShortURLService shortURLService;
+	private TinyURLService tinyURLService;
 	
 	/**
 	 * Handles the client POST requests to add a new url.	
@@ -31,7 +31,7 @@ public class HomeController {
 	public ResponseEntity<String> addURL(@RequestBody String url) {
 		int key = 0;
 		try {
-			key = shortURLService.addURL(url);
+			key = tinyURLService.addURL(url);
 		} catch (Exception e) {			
 			return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
@@ -47,7 +47,7 @@ public class HomeController {
 	@DeleteMapping("/urls/delete/{key}")	
 	public ResponseEntity<String> deleteURL(@PathVariable("key") String key) {
 		try {
-			shortURLService.deleteURL(key);
+			tinyURLService.deleteURL(key);
 		}
 		catch (Exception e) {			
 			return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
@@ -57,16 +57,16 @@ public class HomeController {
 	}
 	
 	/**
-	 * Handles the client GET requests to get all the ShortURL.
+	 * Handles the client GET requests to get all the TinyURL.
 	 * 
-	 * @return	a list of all the ShortURL
+	 * @return	a list of all the TinyURL
 	 */
 	@GetMapping("/urls/all")
 	public ResponseEntity<String> getAllURLs() {
 		String result = "";
 		
 		try {
-			result = shortURLService.getAll().toString();
+			result = tinyURLService.getAll().toString();
 		}
 		catch (Exception e) {			
 			return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);

@@ -8,39 +8,39 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.laszlojanku.spring.urlshortener.UrlShortenerApplication;
-import com.laszlojanku.spring.urlshortener.model.ShortURL;
-import com.laszlojanku.spring.urlshortener.repository.JdbcShortURLRepository;
-import com.laszlojanku.spring.urlshortener.repository.ShortURLRepository;
+import com.laszlojanku.spring.urlshortener.model.TinyURL;
+import com.laszlojanku.spring.urlshortener.repository.JdbcTinyURLRepository;
+import com.laszlojanku.spring.urlshortener.repository.TinyURLRepository;
 
 /** 
- * Provides a Service to manipulate the ShortURLs.
+ * Provides a Service to manipulate the TinyURLs.
  */
 
 @Service
-public class ShortURLService {
+public class TinyURLService {
 		
 	private KeyGeneratorService keyGeneratorService;
-	private ShortURLRepository repository;	
+	private TinyURLRepository repository;	
 	
 	@Autowired
-	public ShortURLService(JdbcShortURLRepository repository, SimpleKeyGeneratorService keyGeneratorService) {
+	public TinyURLService(JdbcTinyURLRepository repository, SimpleKeyGeneratorService keyGeneratorService) {
 		this.repository = repository;
 		this.keyGeneratorService = keyGeneratorService;
 		
-		// Creates a few default ShortURLs
+		// Creates a few default TinyURLs
 		try {
 			addURL("http://www.google.com");
 			addURL("http://www.bing.com");
 			addURL("http://www.yahoo.com");
 			addURL("http://www.facebook.com");
 		} catch (Exception e) {
-			UrlShortenerApplication.logger.warn("Database error at ShortURLService constructor.");
+			UrlShortenerApplication.logger.warn("Database error at TinyURLService constructor.");
 		}
 	}
 	
 	/**
-	 * Deletes the ShortURL from the database using the key.
-	 * @param strKey	the key of the ShortURL in String
+	 * Deletes the TinyURL from the database using the key.
+	 * @param strKey	the key of the TinyURL in String
 	 * @throws			Exception if something went wrong
 	 */	
 	public void deleteURL(String strKey) throws Exception {
@@ -67,25 +67,25 @@ public class ShortURLService {
 	}
 	
 	/**
-	 * Returns a List of all ShortURLs.
-	 * @return		the list of ShortURLs
+	 * Returns a List of all TinyURLs.
+	 * @return		the list of TinyURLs
 	 * @throws		Exception on database error
 	 */	
-	public List<ShortURL> getAll() throws Exception {
-		List<ShortURL> shortURLs = null;
+	public List<TinyURL> getAll() throws Exception {
+		List<TinyURL> tinyURLs = null;
 		
 		try {
-			shortURLs = repository.getAll();
+			tinyURLs = repository.getAll();
 		} catch (DataAccessException e) {
 			throw new Exception("Database error. Couldn't get the URLs from the server.");
 		}
 		
-		return shortURLs;
+		return tinyURLs;
 	}
 	
 	/**
 	 * Finds and returns an URL by key.
-	 * @param	key	the key of the ShortURL
+	 * @param	key	the key of the TinyURL
 	 * @return	url	the URL or returns null if not found
 	 * @throws		Exception if something went wrong
 	 */	
@@ -99,25 +99,25 @@ public class ShortURLService {
 			throw new Exception("Key is not valid.");
 		}
 		
-		ShortURL shortURL;
+		TinyURL tinyURL;
 		
 		try {
-			shortURL = repository.getShortURL(key);
+			tinyURL = repository.getTinyURL(key);
 		} catch (DataAccessException e) {
 			throw new Exception("Database error. Couldn't get the url.");
 		}
 		
-		if (shortURL == null) {
+		if (tinyURL == null) {
 			throw new Exception("URL not found.");
 		}
 		
-		return shortURL.getUrl();
+		return tinyURL.getUrl();
 	}
 	
 	/**
 	 * Adds the url to the database and returns it's key.
 	 * @param	url	the url to be added
-	 * @return		the key for the new ShortURL
+	 * @return		the key for the new TinyURL
 	 * @throws		Exception if something went wrong
 	 */	
 	public int addURL(String url) throws Exception {		
@@ -130,11 +130,11 @@ public class ShortURLService {
 		
 		// Use our KeyGenerator to generate a key to the url
 		int key = keyGeneratorService.getKey();
-		ShortURL shortURL = new ShortURL(key, url);
+		TinyURL tinyURL = new TinyURL(key, url);
 		
 		// Add to the repository
 		try {
-			repository.add(shortURL);
+			repository.add(tinyURL);
 		} catch (DataAccessException e) {
 			throw new Exception("Database error.");
 		}

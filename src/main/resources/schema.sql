@@ -1,5 +1,5 @@
-CREATE TABLE shorturl (
-	shorturl_key int not null,
+CREATE TABLE tinyurl (
+	tinyurl_key int not null,
 	url varchar(100) not null,
-	PRIMARY KEY (shorturl_key)
+	PRIMARY KEY (tinyurl_key)
 );

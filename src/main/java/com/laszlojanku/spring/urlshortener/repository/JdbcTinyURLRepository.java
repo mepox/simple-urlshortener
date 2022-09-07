@@ -9,34 +9,33 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.laszlojanku.spring.urlshortener.model.ShortURL;
+import com.laszlojanku.spring.urlshortener.model.TinyURL;
 
 /** 
  * Repository using JdbcTemplate to access the database.
  */
 
 @Repository
-public class JdbcShortURLRepository implements ShortURLRepository {
+public class JdbcTinyURLRepository implements TinyURLRepository {
 	
 	@Autowired
 	private JdbcTemplate jdbc;
 	
 	/**
-	 * Adds a ShortURL to the database using JdbcTemplate.
-	 * @param shortURL	the ShortURL to be added
+	 * Adds a TinyURL to the database using JdbcTemplate.
+	 * @param tinyURL	the TinyURL to be added
 	 * @throws 			DataAccessException if there is any problem using JdbcTemplate 				
 	 */
 	@Override
-	public void add(ShortURL shortURL) throws DataAccessException {
-		String sql = "INSERT INTO shorturl (shorturl_key, url) VALUES (?, ?)";
-		//Object[] params = { shortURL.getKey(), shortURL.getUrl() };		
+	public void add(TinyURL tinyURL) throws DataAccessException {
+		String sql = "INSERT INTO tinyurl (tinyurl_key, url) VALUES (?, ?)";
 	
-		jdbc.update(sql, shortURL.getKey(), shortURL.getUrl());
+		jdbc.update(sql, tinyURL.getKey(), tinyURL.getUrl());
 	}
 	
 	/**
-	 * Deletes a ShortURL from the database using JdbcTemplate
-	 * @param key	the key of the ShortURL
+	 * Deletes a TinyURL from the database using JdbcTemplate
+	 * @param key	the key of the TinyURL
 	 * @return 		true if successful or false if not found
 	 * @throws		DataAccessException if there is any problem using JdbcTemplate
 	 */
@@ -47,7 +46,7 @@ public class JdbcShortURLRepository implements ShortURLRepository {
 			return false;
 		}
 		
-		String sql = "DELETE FROM shorturl WHERE shorturl_key = ?";
+		String sql = "DELETE FROM tinyurl WHERE tinyurl_key = ?";
 		
 		jdbc.update(sql, key);	
 		
@@ -55,57 +54,57 @@ public class JdbcShortURLRepository implements ShortURLRepository {
 	}
 	
 	/**
-	 * Returns a List of all the ShortURLs.
+	 * Returns a List of all the TinyURLs.
 	 * @return		null if empty
 	 * @throws		DataAccessException if there is any problem using JdbcTemplate
 	 */
 	@Override
-	public List<ShortURL> getAll() throws DataAccessException {
-		List<ShortURL> shortURLs = new ArrayList<ShortURL>();
-		List<Map<String, Object>> shortURLsMap = new ArrayList<Map<String, Object>>();
+	public List<TinyURL> getAll() throws DataAccessException {
+		List<TinyURL> tinyURLs = new ArrayList<TinyURL>();
+		List<Map<String, Object>> tinyURLsMap = new ArrayList<Map<String, Object>>();
 		
-		String sql = "SELECT * FROM shorturl";		
+		String sql = "SELECT * FROM tinyurl";		
 		
-		shortURLsMap = jdbc.queryForList(sql);
+		tinyURLsMap = jdbc.queryForList(sql);
 		
-		if (shortURLsMap != null) {		
-			for (Map<String, Object> shortURLMap : shortURLsMap) {
-				ShortURL shortURL = buildByRow(shortURLMap);
-				shortURLs.add(shortURL);
+		if (tinyURLsMap != null) {		
+			for (Map<String, Object> tinyURLMap : tinyURLsMap) {
+				TinyURL tinyURL = buildByRow(tinyURLMap);
+				tinyURLs.add(tinyURL);
 			}
 		}
 		
-		return shortURLs;
+		return tinyURLs;
 	}
 	
-	private ShortURL buildByRow(Map<String, Object> row) {
+	private TinyURL buildByRow(Map<String, Object> row) {
 		// Null check
 		if (row == null) {
 			return null;
 		}
 		
-		int key = (int) row.get("shorturl_key");
+		int key = (int) row.get("tinyurl_key");
 		String url = (String) row.get("url");
 		
-		ShortURL shortURL = new ShortURL(key, url);
+		TinyURL tinyURL = new TinyURL(key, url);
 		
-		return shortURL;
+		return tinyURL;
 	}
 	
 	/**
-	 * Finds and returns a ShortURL using a key.
-	 * @param key	the key of the ShortURL
-	 * @return 		a ShortURL or returns null if not found
+	 * Finds and returns a TinyURL using a key.
+	 * @param key	the key of the TinyURL
+	 * @return 		a TinyURL or returns null if not found
 	 * @throws 		DataAccessException if there is any problem using JdbcTemplate
 	 */
 	@Override
-	public ShortURL getShortURL(int key) throws DataAccessException {
+	public TinyURL getTinyURL(int key) throws DataAccessException {
 		// Return null if key not exists
 		if (!isExists(key)) {
 			return null;
 		}		
 		
-		String sql = "SELECT * FROM shorturl WHERE shorturl_key = ?";
+		String sql = "SELECT * FROM tinyurl WHERE tinyurl_key = ?";
 		
 		Map<String, Object> row = jdbc.queryForMap(sql, key);
 		
@@ -114,13 +113,13 @@ public class JdbcShortURLRepository implements ShortURLRepository {
 	
 	/**
 	 * Checks if the key is found in the database.
-	 * @param key	the key of the ShortURL
+	 * @param key	the key of the TinyURL
 	 * @return		true if found
 	 * @throws		DataAccessException if there is any problem using JdbcTemplate
 	 */
 	@Override
 	public boolean isExists(int key) throws DataAccessException {
-		String sql = "SELECT count(*) FROM shorturl WHERE shorturl_key = ?";		
+		String sql = "SELECT count(*) FROM tinyurl WHERE tinyurl_key = ?";		
 		
 		int count = jdbc.queryForObject(sql, Integer.class, key);
 		

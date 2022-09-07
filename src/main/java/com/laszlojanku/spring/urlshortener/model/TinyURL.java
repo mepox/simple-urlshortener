@@ -1,14 +1,14 @@
 package com.laszlojanku.spring.urlshortener.model;
 
 /** 
- * Represent a ShortURL.
+ * Represent a TinyURL.
  */
 
-public class ShortURL {	
+public class TinyURL {	
 	private String url;	
 	private int key;	
 	
-	public ShortURL(int key, String url) {
+	public TinyURL(int key, String url) {
 		this.key = key;
 		this.url = url;
 	}
