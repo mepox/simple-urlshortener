@@ -23,7 +23,7 @@ public class TinyURLService {
 	private TinyURLRepository repository;	
 	
 	@Autowired
-	public TinyURLService(JdbcTinyURLRepository repository, SimpleKeyGeneratorService keyGeneratorService) {
+	public TinyURLService(JdbcTinyURLRepository repository, RandomKeyGeneratorService keyGeneratorService) {
 		this.repository = repository;
 		this.keyGeneratorService = keyGeneratorService;
 		
