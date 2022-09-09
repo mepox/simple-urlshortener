@@ -79,11 +79,14 @@ function addURL() {
 }
 
 function deleteURLRowButton(row) {
-	// Gets the key
-	var key = row.parentNode.parentNode.childNodes[0].firstChild.nodeValue;	
-
-	// Gets the 4 digits from the end
-	key = key.substr(key.length - 4);	
+	// Get the url
+	var tinyUrl = row.parentNode.parentNode.childNodes[0].firstChild.nodeValue;
+	
+	// Split into array
+	var temp = tinyUrl.split("/");
+	
+	// Get the key
+	var key = temp[temp.length-1];
 	
 	var url = window.location + "urls/delete/" + key;
 	var xhr = new XMLHttpRequest();
