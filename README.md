@@ -23,6 +23,7 @@ The main components of the service are:
 
 - TinyURLService: Provide a service to manipulate the TinyURLs.
 - SimpleKeyGeneratorServce: A placeholder that generate a key and return an Integer starting from 1000.
+- RandomKeyGeneratorService: Generate a 4 letter key from characters [a-z, A-Z, 0-9].
 
 ## Installation 
 The project is created with Maven, so you just need to import it to your IDE and build the project to resolve the dependencies.
