@@ -33,7 +33,7 @@ public class ArrayListTinyURLRepository implements TinyURLRepository {
 	 * @return 		true if successful
 	 */
 	@Override
-	public boolean delete(int key) {
+	public boolean delete(String key) {
 		// First find the index
 		int indexToRemove = -1;
 		for (int i = 0; i < tinyURLs.size(); i++) {
@@ -67,7 +67,7 @@ public class ArrayListTinyURLRepository implements TinyURLRepository {
 	 * @return 		the TinyURL or null if not found
 	 */
 	@Override
-	public TinyURL getTinyURL(int key) {		
+	public TinyURL getTinyURL(String key) {		
 		for (TinyURL tinyURL : tinyURLs) {
 			if (tinyURL.getKey() == key) {
 				return tinyURL;
@@ -83,7 +83,7 @@ public class ArrayListTinyURLRepository implements TinyURLRepository {
 	 * @return		true if found
 	 */	
 	@Override
-	public boolean isExists(int key) {		
+	public boolean isExists(String key) {		
 		for (TinyURL tinyURL : tinyURLs) {
 			if (tinyURL.getKey() == key) {
 				// Found so return true

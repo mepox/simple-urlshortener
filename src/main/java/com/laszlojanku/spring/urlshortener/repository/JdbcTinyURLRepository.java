@@ -40,7 +40,7 @@ public class JdbcTinyURLRepository implements TinyURLRepository {
 	 * @throws		DataAccessException if there is any problem using JdbcTemplate
 	 */
 	@Override
-	public boolean delete(int key) throws DataAccessException {
+	public boolean delete(String key) throws DataAccessException {
 		// Return false if not found
 		if (!isExists(key)) {
 			return false;
@@ -83,7 +83,7 @@ public class JdbcTinyURLRepository implements TinyURLRepository {
 			return null;
 		}
 		
-		int key = (int) row.get("tinyurl_key");
+		String key = (String) row.get("tinyurl_key");
 		String url = (String) row.get("url");
 		
 		TinyURL tinyURL = new TinyURL(key, url);
@@ -98,7 +98,7 @@ public class JdbcTinyURLRepository implements TinyURLRepository {
 	 * @throws 		DataAccessException if there is any problem using JdbcTemplate
 	 */
 	@Override
-	public TinyURL getTinyURL(int key) throws DataAccessException {
+	public TinyURL getTinyURL(String key) throws DataAccessException {
 		// Return null if key not exists
 		if (!isExists(key)) {
 			return null;
@@ -118,7 +118,7 @@ public class JdbcTinyURLRepository implements TinyURLRepository {
 	 * @throws		DataAccessException if there is any problem using JdbcTemplate
 	 */
 	@Override
-	public boolean isExists(int key) throws DataAccessException {
+	public boolean isExists(String key) throws DataAccessException {
 		String sql = "SELECT count(*) FROM tinyurl WHERE tinyurl_key = ?";		
 		
 		int count = jdbc.queryForObject(sql, Integer.class, key);

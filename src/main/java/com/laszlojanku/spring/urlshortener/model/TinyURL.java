@@ -6,9 +6,9 @@ package com.laszlojanku.spring.urlshortener.model;
 
 public class TinyURL {	
 	private String url;	
-	private int key;	
+	private String key;	
 	
-	public TinyURL(int key, String url) {
+	public TinyURL(String key, String url) {
 		this.key = key;
 		this.url = url;
 	}
@@ -17,7 +17,7 @@ public class TinyURL {
 		return this.url;
 	}
 	
-	public int getKey() {
+	public String getKey() {
 		return this.key;
 	}
 	

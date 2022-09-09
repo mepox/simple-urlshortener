@@ -43,20 +43,11 @@ public class TinyURLService {
 	 * @param strKey	the key of the TinyURL in String
 	 * @throws			Exception if something went wrong
 	 */	
-	public void deleteURL(String strKey) throws Exception {
-		// First validate the key as we need an Integer
-		int key = 0;
-		
-		try {
-			key = Integer.parseInt(strKey);
-		} catch (NumberFormatException e) {
-			throw new Exception("Key is not valid.");
-		}
-		
+	public void deleteURL(String strKey) throws Exception {		
 		boolean isURLDeleted;
 		
 		try {
-			isURLDeleted = repository.delete(key);
+			isURLDeleted = repository.delete(strKey);
 		} catch (DataAccessException e) {
 			throw new Exception("Database error.");
 		}
@@ -89,20 +80,11 @@ public class TinyURLService {
 	 * @return	url	the URL or returns null if not found
 	 * @throws		Exception if something went wrong
 	 */	
-	public String getURL(String strKey) throws Exception {
-		// First validate the key as we need an Integer
-		int key = 0;
-		
-		try {
-			key = Integer.parseInt(strKey);
-		} catch (NumberFormatException e) {
-			throw new Exception("Key is not valid.");
-		}
-		
+	public String getURL(String strKey) throws Exception {		
 		TinyURL tinyURL;
 		
 		try {
-			tinyURL = repository.getTinyURL(key);
+			tinyURL = repository.getTinyURL(strKey);
 		} catch (DataAccessException e) {
 			throw new Exception("Database error. Couldn't get the url.");
 		}
@@ -120,7 +102,7 @@ public class TinyURLService {
 	 * @return		the key for the new TinyURL
 	 * @throws		Exception if something went wrong
 	 */	
-	public int addURL(String url) throws Exception {		
+	public String addURL(String url) throws Exception {		
 		// Check if the URL is valid	
 		try {
 			URI uri = URI.create(url);
@@ -129,7 +111,7 @@ public class TinyURLService {
 		}	
 		
 		// Use our KeyGenerator to generate a key to the url
-		int key = keyGeneratorService.getKey();
+		String key = keyGeneratorService.getKey();
 		TinyURL tinyURL = new TinyURL(key, url);
 		
 		// Add to the repository

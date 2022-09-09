@@ -10,9 +10,9 @@ import com.laszlojanku.spring.urlshortener.model.TinyURL;
 public interface TinyURLRepository {
 	
 	public void add(TinyURL tinyURL);
-	public boolean delete(int key);	
+	public boolean delete(String key);	
 	public List<TinyURL> getAll();
-	public TinyURL getTinyURL(int key);
-	public boolean isExists(int key);
+	public TinyURL getTinyURL(String key);
+	public boolean isExists(String key);
 	
 }

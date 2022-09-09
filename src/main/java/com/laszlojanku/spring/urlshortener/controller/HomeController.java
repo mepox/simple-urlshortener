@@ -29,14 +29,14 @@ public class HomeController {
 	 */
 	@PostMapping("/urls/add")	
 	public ResponseEntity<String> addURL(@RequestBody String url) {
-		int key = 0;
+		String key = "";
 		try {
 			key = tinyURLService.addURL(url);
 		} catch (Exception e) {			
 			return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 		
-		return new ResponseEntity<String>(Integer.toString(key), HttpStatus.OK);		
+		return new ResponseEntity<String>(key, HttpStatus.OK);		
 	}
 	
 	/**

@@ -12,8 +12,10 @@ public class SimpleKeyGeneratorService implements KeyGeneratorService {
 	private int key = 1000;
 
 	@Override
-	public int getKey() {				
-		return key++;
+	public String getKey() {				
+		String newKey = Integer.toString(key);
+		key++;
+		return newKey;
 	}
 
 }
