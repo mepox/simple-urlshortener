@@ -33,7 +33,7 @@ public class TinyURLResolveController {
 		
 		try {
 			url = tinyURLService.getURL(strKey);
-		} catch (Exception e) {
+		} catch (RuntimeException e) {
 			return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
 		}
 		

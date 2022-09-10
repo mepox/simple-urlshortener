@@ -1,5 +1,6 @@
 package com.laszlojanku.spring.urlshortener.service;
 
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 
@@ -8,6 +9,10 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.laszlojanku.spring.urlshortener.UrlShortenerApplication;
+import com.laszlojanku.spring.urlshortener.exception.KeyNotFoundException;
+import com.laszlojanku.spring.urlshortener.exception.KeyNotValidException;
+import com.laszlojanku.spring.urlshortener.exception.UrlNotFoundException;
+import com.laszlojanku.spring.urlshortener.exception.UrlNotValidException;
 import com.laszlojanku.spring.urlshortener.model.TinyURL;
 import com.laszlojanku.spring.urlshortener.repository.JdbcTinyURLRepository;
 import com.laszlojanku.spring.urlshortener.repository.TinyURLRepository;
@@ -33,19 +38,18 @@ public class TinyURLService {
 			addURL("http://www.bing.com");
 			addURL("http://www.yahoo.com");
 			addURL("http://www.facebook.com");
-		} catch (Exception e) {
-			UrlShortenerApplication.logger.warn("Database error at TinyURLService constructor.");
+		} catch (RuntimeException e) {
+			UrlShortenerApplication.logger.warn(e.getMessage());
 		}
 	}
 	
 	/**
 	 * Deletes the TinyURL from the database using the key.
-	 * @param strKey	the key of the TinyURL in String
-	 * @throws			Exception if something went wrong
+	 * @param strKey	the key of the TinyURL in String	 
 	 */	
-	public void deleteURL(String strKey) throws Exception {	
+	public void deleteURL(String strKey) {	
 		if (!keyGeneratorService.isValid(strKey)) {
-			throw new Exception("Key is not valid.");
+			throw new KeyNotValidException("Key is not valid.");
 		}
 		
 		boolean isURLDeleted;
@@ -53,26 +57,25 @@ public class TinyURLService {
 		try {
 			isURLDeleted = repository.delete(strKey);
 		} catch (DataAccessException e) {
-			throw new Exception("Database error.");
+			throw new RuntimeException("Database error. Couldn't delete the TinyURL.");
 		}
 		
 		if (!isURLDeleted) {
-			throw new Exception("Key is not found.");			
+			throw new KeyNotFoundException("Key is not found.");			
 		}		
 	}
 	
 	/**
 	 * Returns a List of all TinyURLs.
-	 * @return		the list of TinyURLs
-	 * @throws		Exception on database error
+	 * @return		the list of TinyURLs	 
 	 */	
-	public List<TinyURL> getAll() throws Exception {
+	public List<TinyURL> getAll() {
 		List<TinyURL> tinyURLs = null;
 		
 		try {
 			tinyURLs = repository.getAll();
 		} catch (DataAccessException e) {
-			throw new Exception("Database error. Couldn't get the URLs from the server.");
+			throw new RuntimeException("Database error. Couldn't get TinyURLs from the server.");
 		}
 		
 		return tinyURLs;
@@ -81,12 +84,11 @@ public class TinyURLService {
 	/**
 	 * Finds and returns an URL by key.
 	 * @param	key	the key of the TinyURL
-	 * @return	url	the URL or returns null if not found
-	 * @throws		Exception if something went wrong
+	 * @return	url	the URL or returns null if not found	
 	 */	
-	public String getURL(String strKey) throws Exception {
+	public String getURL(String strKey) {
 		if (!keyGeneratorService.isValid(strKey)) {
-			throw new Exception("Key is not valid.");
+			throw new KeyNotValidException("Key is not valid.");
 		}
 		
 		TinyURL tinyURL;
@@ -94,11 +96,11 @@ public class TinyURLService {
 		try {
 			tinyURL = repository.getTinyURL(strKey);
 		} catch (DataAccessException e) {
-			throw new Exception("Database error. Couldn't get the url.");
+			throw new RuntimeException("Database error. Couldn't retreive the URL.");
 		}
 		
 		if (tinyURL == null) {
-			throw new Exception("URL not found.");
+			throw new UrlNotFoundException("URL not found.");			
 		}
 		
 		return tinyURL.getUrl();
@@ -107,15 +109,14 @@ public class TinyURLService {
 	/**
 	 * Adds the url to the database and returns it's key.
 	 * @param	url	the url to be added
-	 * @return		the key for the new TinyURL
-	 * @throws		Exception if something went wrong
+	 * @return		the key for the new TinyURL	
 	 */	
-	public String addURL(String url) throws Exception {		
+	public String addURL(String url) {		
 		// Check if the URL is valid	
 		try {
-			URL validURL = new URL(url);
-		} catch (IllegalArgumentException e) {
-			throw new Exception("Not a valid HTTP URL. Use a full HTTP URL: e.g. http://www.google.com");			
+			new URL(url);
+		} catch (MalformedURLException e) {
+			throw new UrlNotValidException("Not a valid HTTP URL. Use a full HTTP URL: e.g. http://www.google.com");			
 		}	
 		
 		// Use our KeyGenerator to generate a key to the url
@@ -126,7 +127,7 @@ public class TinyURLService {
 		try {
 			repository.add(tinyURL);
 		} catch (DataAccessException e) {
-			throw new Exception("Database error.");
+			throw new RuntimeException("Database error. Couldn't add the new URL.");
 		}
 		
 		// Everything went OK, return the key
