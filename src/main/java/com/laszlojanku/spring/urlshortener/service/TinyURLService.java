@@ -1,6 +1,6 @@
 package com.laszlojanku.spring.urlshortener.service;
 
-import java.net.URI;
+import java.net.URL;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -105,7 +105,7 @@ public class TinyURLService {
 	public String addURL(String url) throws Exception {		
 		// Check if the URL is valid	
 		try {
-			URI uri = URI.create(url);
+			URL validURL = new URL(url);
 		} catch (IllegalArgumentException e) {
 			throw new Exception("Not a valid HTTP URL. Use a full HTTP URL: e.g. http://www.google.com");			
 		}	
