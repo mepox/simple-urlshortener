@@ -18,4 +18,21 @@ public class SimpleKeyGeneratorService implements KeyGeneratorService {
 		return newKey;
 	}
 
+	@Override
+	public boolean isValid(String strKey) {
+		int key;
+		
+		try {
+			key = Integer.parseInt(strKey);
+		} catch (NumberFormatException e) {
+			return false;
+		}
+		
+		if (key < 1000) {
+			return false;
+		}
+		
+		return true;
+	}
+
 }

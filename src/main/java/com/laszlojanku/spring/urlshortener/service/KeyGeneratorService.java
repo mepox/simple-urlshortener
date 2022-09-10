@@ -6,4 +6,5 @@ package com.laszlojanku.spring.urlshortener.service;
 public interface KeyGeneratorService {
 	
 	public String getKey();
+	public boolean isValid(String strKey);
 }

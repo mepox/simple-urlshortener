@@ -43,7 +43,11 @@ public class TinyURLService {
 	 * @param strKey	the key of the TinyURL in String
 	 * @throws			Exception if something went wrong
 	 */	
-	public void deleteURL(String strKey) throws Exception {		
+	public void deleteURL(String strKey) throws Exception {	
+		if (!keyGeneratorService.isValid(strKey)) {
+			throw new Exception("Key is not valid.");
+		}
+		
 		boolean isURLDeleted;
 		
 		try {
@@ -80,7 +84,11 @@ public class TinyURLService {
 	 * @return	url	the URL or returns null if not found
 	 * @throws		Exception if something went wrong
 	 */	
-	public String getURL(String strKey) throws Exception {		
+	public String getURL(String strKey) throws Exception {
+		if (!keyGeneratorService.isValid(strKey)) {
+			throw new Exception("Key is not valid.");
+		}
+		
 		TinyURL tinyURL;
 		
 		try {

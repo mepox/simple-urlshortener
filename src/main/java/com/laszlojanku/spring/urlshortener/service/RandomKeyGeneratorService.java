@@ -47,4 +47,23 @@ public class RandomKeyGeneratorService implements KeyGeneratorService {
 		return sb.toString();
 	}
 
+	@Override
+	public boolean isValid(String strKey) {
+		boolean found = false;
+		for (int i = 0; i < strKey.length(); i++) {
+			found = false;
+			for (int j = 0; j < SEED.length(); j++) {
+				if (strKey.charAt(i) == SEED.charAt(j)) {
+					found = true;
+					break;
+				}
+			}
+			if (!found) {
+				break;
+			}
+		}
+		
+		return found;
+	}
+
 }
