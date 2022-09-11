@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.laszlojanku.spring.urlshortener.exception.JdbcException;
 import com.laszlojanku.spring.urlshortener.exception.KeyNotFoundException;
 import com.laszlojanku.spring.urlshortener.exception.KeyNotValidException;
-import com.laszlojanku.spring.urlshortener.exception.UrlNotFoundException;
 import com.laszlojanku.spring.urlshortener.exception.UrlNotValidException;
 import com.laszlojanku.spring.urlshortener.service.TinyURLService;
 
@@ -36,7 +36,7 @@ public class HomeController {
 		String key = "";
 		try {
 			key = tinyURLService.addURL(url);
-		} catch (UrlNotValidException | RuntimeException e) {
+		} catch (UrlNotValidException | JdbcException e) {
 			return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);			
 		}		
 		
@@ -53,7 +53,7 @@ public class HomeController {
 		try {
 			tinyURLService.deleteURL(key);
 		}
-		catch (KeyNotValidException | KeyNotFoundException | RuntimeException e) {			
+		catch (KeyNotValidException | KeyNotFoundException | JdbcException e) {			
 			return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 		
@@ -72,7 +72,7 @@ public class HomeController {
 		try {
 			result = tinyURLService.getAll().toString();
 		}
-		catch (RuntimeException e) {			
+		catch (JdbcException e) {			
 			return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 		

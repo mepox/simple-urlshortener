@@ -9,6 +9,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.laszlojanku.spring.urlshortener.UrlShortenerApplication;
+import com.laszlojanku.spring.urlshortener.exception.JdbcException;
 import com.laszlojanku.spring.urlshortener.exception.KeyNotFoundException;
 import com.laszlojanku.spring.urlshortener.exception.KeyNotValidException;
 import com.laszlojanku.spring.urlshortener.exception.UrlNotFoundException;
@@ -48,9 +49,9 @@ public class TinyURLService {
 	 * @param strKey	the key of the TinyURL in String	 
 	 * @throws KeyNotFoundException 
 	 * @throws KeyNotValidException
-	 * @throws RuntimeException
+	 * @throws JdbcException
 	 */	
-	public void deleteURL(String strKey) throws KeyNotValidException, KeyNotFoundException, RuntimeException {	
+	public void deleteURL(String strKey) throws KeyNotValidException, KeyNotFoundException, JdbcException {	
 		if (!keyGeneratorService.isValid(strKey)) {
 			throw new KeyNotValidException("Key is not valid.");
 		}
@@ -60,7 +61,7 @@ public class TinyURLService {
 		try {
 			isURLDeleted = repository.delete(strKey);
 		} catch (DataAccessException e) {
-			throw new RuntimeException("Database error. Couldn't delete the URL.");
+			throw new JdbcException("Database error. Couldn't delete the URL.");
 		}
 		
 		if (!isURLDeleted) {
@@ -71,15 +72,15 @@ public class TinyURLService {
 	/**
 	 * Returns a List of all TinyURLs.
 	 * @return		the list of TinyURLs	
-	 * @throws RuntimeException 
+	 * @throws JdbcException 
 	 */	
-	public List<TinyURL> getAll() throws RuntimeException {		
+	public List<TinyURL> getAll() throws JdbcException {		
 		List<TinyURL> tinyURLs = null;
 		
 		try {
 			tinyURLs = repository.getAll();
 		} catch (DataAccessException e) {
-			throw new RuntimeException("Database error. Couldn't get the URLs.");
+			throw new JdbcException("Database error. Couldn't get the URLs.");
 		}
 		
 		return tinyURLs;
@@ -91,9 +92,9 @@ public class TinyURLService {
 	 * @return	url	the URL or returns null if not found	
 	 * @throws KeyNotValidException 
 	 * @throws UrlNotFoundException 
-	 * @throws RuntimeException
+	 * @throws JdbcException
 	 */	
-	public String getURL(String strKey) throws KeyNotValidException, UrlNotFoundException, RuntimeException {
+	public String getURL(String strKey) throws KeyNotValidException, UrlNotFoundException, JdbcException {
 		if (!keyGeneratorService.isValid(strKey)) {
 			throw new KeyNotValidException("Key is not valid.");
 		}
@@ -103,7 +104,7 @@ public class TinyURLService {
 		try {
 			tinyURL = repository.getTinyURL(strKey);
 		} catch (DataAccessException e) {
-			throw new RuntimeException("Database error. Couldn't get the URL.");
+			throw new JdbcException("Database error. Couldn't get the URL.");
 		}
 		
 		if (tinyURL == null) {
@@ -118,9 +119,9 @@ public class TinyURLService {
 	 * @param	url	the url to be added
 	 * @return		the key for the new TinyURL	
 	 * @throws UrlNotValidException 
-	 * @throws RuntimeException
+	 * @throws JdbcException
 	 */	
-	public String addURL(String url) throws UrlNotValidException, RuntimeException {		
+	public String addURL(String url) throws UrlNotValidException, JdbcException {		
 		// Check if the URL is valid	
 		try {
 			new URL(url);
@@ -136,7 +137,7 @@ public class TinyURLService {
 		try {
 			repository.add(tinyURL);
 		} catch (DataAccessException e) {
-			throw new RuntimeException("Database error. Couldn't add the URL.");
+			throw new JdbcException("Database error. Couldn't add the URL.");
 		}
 		
 		// Everything went OK, return the key
