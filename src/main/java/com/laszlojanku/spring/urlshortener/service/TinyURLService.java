@@ -25,13 +25,15 @@ import com.laszlojanku.spring.urlshortener.repository.TinyURLRepository;
 @Service
 public class TinyURLService {
 		
+	private TinyURLRepository repository;
 	private KeyGeneratorService keyGeneratorService;
-	private TinyURLRepository repository;	
+	private UrlValidatorService urlValidatorService;		
 	
 	@Autowired
-	public TinyURLService(JdbcTinyURLRepository repository, RandomKeyGeneratorService keyGeneratorService) {
+	public TinyURLService(JdbcTinyURLRepository repository, RandomKeyGeneratorService keyGeneratorService, UrlValidatorService urlValidatorService) {
 		this.repository = repository;
 		this.keyGeneratorService = keyGeneratorService;
+		this.urlValidatorService = urlValidatorService;
 		
 		// Creates a few default TinyURLs
 		try {
@@ -122,12 +124,10 @@ public class TinyURLService {
 	 * @throws JdbcException
 	 */	
 	public String addURL(String url) throws UrlNotValidException, JdbcException {		
-		// Check if the URL is valid	
-		try {
-			new URL(url);
-		} catch (MalformedURLException e) {
-			throw new UrlNotValidException("Not a valid HTTP URL. Use a full HTTP URL: e.g. http://www.google.com");			
-		}	
+		// Check if the URL is valid
+		if (!urlValidatorService.isValid(url)) {
+			throw new UrlNotValidException("Not a valid HTTP URL. Use a full HTTP URL: e.g. http://www.google.com");
+		}			
 		
 		// Use our KeyGenerator to generate a key to the url
 		String key = keyGeneratorService.getKey();

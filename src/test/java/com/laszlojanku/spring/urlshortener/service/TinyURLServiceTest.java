@@ -25,21 +25,24 @@ public class TinyURLServiceTest {
 	@Mock
 	private RandomKeyGeneratorService keyGeneratorService;
 	
+	@Mock
+	private UrlValidatorService urlValidatorService;
+	
 	@InjectMocks
 	private TinyURLService tinyURLService;
 	
 	@Test
 	public void addURL_WhenValid_ShouldntThrowException() {
-		String validUrl = "http://www.google.com";
+		when(urlValidatorService.isValid(anyString())).thenReturn(true);
 		
-		assertDoesNotThrow(() -> tinyURLService.addURL(validUrl));		
+		assertDoesNotThrow(() -> tinyURLService.addURL(anyString()));		
 	}
 	
 	@Test
 	public void addURL_WhenInvalid_ShouldThrowException() {
-		String invalidUrl = "www.google.com";
+		when(urlValidatorService.isValid(anyString())).thenReturn(false);
 		
-		assertThrows(UrlNotValidException.class, () -> tinyURLService.addURL(invalidUrl));
+		assertThrows(UrlNotValidException.class, () -> tinyURLService.addURL(anyString()));
 	}
 	
 	@Test
