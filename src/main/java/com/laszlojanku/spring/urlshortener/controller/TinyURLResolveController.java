@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.laszlojanku.spring.urlshortener.exception.KeyNotValidException;
+import com.laszlojanku.spring.urlshortener.exception.UrlNotFoundException;
 import com.laszlojanku.spring.urlshortener.service.TinyURLService;
 
 /** 
@@ -33,7 +35,7 @@ public class TinyURLResolveController {
 		
 		try {
 			url = tinyURLService.getURL(strKey);
-		} catch (RuntimeException e) {
+		} catch (KeyNotValidException | UrlNotFoundException | RuntimeException e) {
 			return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
 		}
 		
