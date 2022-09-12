@@ -1,7 +1,5 @@
 package com.laszlojanku.spring.urlshortener.service;
 
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
