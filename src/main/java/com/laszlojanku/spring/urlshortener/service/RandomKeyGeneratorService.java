@@ -53,6 +53,10 @@ public class RandomKeyGeneratorService implements KeyGeneratorService {
 			return false;
 		}
 		
+		if (strKey.length() != KEY_LENGTH) {
+			return false;
+		}
+		
 		boolean found = false;
 		for (int i = 0; i < strKey.length(); i++) {
 			found = false;
