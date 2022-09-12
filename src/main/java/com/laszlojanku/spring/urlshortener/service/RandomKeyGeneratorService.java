@@ -49,6 +49,10 @@ public class RandomKeyGeneratorService implements KeyGeneratorService {
 
 	@Override
 	public boolean isValid(String strKey) {
+		if (strKey == null | strKey.isBlank()) {
+			return false;
+		}
+		
 		boolean found = false;
 		for (int i = 0; i < strKey.length(); i++) {
 			found = false;
