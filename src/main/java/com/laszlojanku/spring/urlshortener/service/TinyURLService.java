@@ -3,6 +3,8 @@ package com.laszlojanku.spring.urlshortener.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.event.EventListener;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +16,6 @@ import com.laszlojanku.spring.urlshortener.exception.UrlNotFoundException;
 import com.laszlojanku.spring.urlshortener.exception.UrlNotValidException;
 import com.laszlojanku.spring.urlshortener.model.TinyURL;
 import com.laszlojanku.spring.urlshortener.repository.JdbcTinyURLRepository;
-import com.laszlojanku.spring.urlshortener.repository.TinyURLRepository;
 
 /** 
  * Provides a Service to manipulate the TinyURLs.
@@ -23,16 +24,17 @@ import com.laszlojanku.spring.urlshortener.repository.TinyURLRepository;
 @Service
 public class TinyURLService {
 		
-	private TinyURLRepository repository;
-	private KeyGeneratorService keyGeneratorService;
-	private UrlValidatorService urlValidatorService;		
+	@Autowired
+	private JdbcTinyURLRepository repository;
 	
 	@Autowired
-	public TinyURLService(JdbcTinyURLRepository repository, RandomKeyGeneratorService keyGeneratorService, UrlValidatorService urlValidatorService) {
-		this.repository = repository;
-		this.keyGeneratorService = keyGeneratorService;
-		this.urlValidatorService = urlValidatorService;
-		
+	private RandomKeyGeneratorService keyGeneratorService;
+	
+	@Autowired
+	private UrlValidatorService urlValidatorService;	
+
+	@EventListener(ApplicationReadyEvent.class)
+	private void addSomeUrlAfterStartup() {
 		// Creates a few default TinyURLs
 		try {
 			addURL("http://www.google.com");
