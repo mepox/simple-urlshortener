@@ -66,5 +66,14 @@ public class RandomKeyGeneratorServiceTest {
 		
 		assertFalse(actual);
 	}
+	
+	@Test
+	public void isValid_WhenNull_ShouldReturnFalse() {
+		String key = null;
+		
+		boolean actual = randomKeyGeneratorService.isValid(key);
+		
+		assertFalse(actual);
+	}
 
 }

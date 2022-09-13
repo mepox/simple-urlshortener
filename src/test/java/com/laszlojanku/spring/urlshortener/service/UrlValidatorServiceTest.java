@@ -40,4 +40,22 @@ public class UrlValidatorServiceTest {
 		assertFalse(actual);
 	}
 	
+	@Test
+	public void isValid_WhenNull_ShouldReturnFalse() {
+		String url = null;
+		
+		boolean actual = urlValidatorService.isValid(url);
+		
+		assertFalse(actual);
+	}
+	
+	@Test
+	public void isValid_WhenEmpty_ShouldReturnFalse() {
+		String url = "";
+		
+		boolean actual = urlValidatorService.isValid(url);
+		
+		assertFalse(actual);
+	}
+	
 }
