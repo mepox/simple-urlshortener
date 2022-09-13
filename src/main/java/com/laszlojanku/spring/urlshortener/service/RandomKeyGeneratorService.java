@@ -49,7 +49,7 @@ public class RandomKeyGeneratorService implements KeyGeneratorService {
 
 	@Override
 	public boolean isValid(String strKey) {
-		if (strKey == null | strKey.isBlank()) {
+		if (strKey == null || strKey.isBlank()) {
 			return false;
 		}
 		
