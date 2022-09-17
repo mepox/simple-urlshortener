@@ -1,6 +1,6 @@
 # Simple URL Shortener
 
-A small hobby project to create an URL Shortener service using Spring Boot.
+A Simple URL Shortener service made with Spring Boot. 
 
 ![Alt text](screenshot.jpg?raw=true "URL Shortener")
 
