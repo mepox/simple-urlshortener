@@ -11,16 +11,16 @@
 </head>
 
 <body>
-<h1 class="center">URL Shortener</h1>
-<div class="center">
-	<form id="addURLForm" action="javascript:addURL()">
-		<input type="text" name="newURL" placeholder="Shorten your link (e.g. http://www.google.com)" style="width:50%" autofocus>
-		<input type="submit" id="shortenButton" value="Shorten">
-	</form>
+<h1 id="title">URL Shortener</h1>
+<div id="shortenBox">
 	<p id="statusText"></p>
+	<form id="addURLForm" action="javascript:addURL()">
+		<input type="text" id="enterUrl" name="newURL" placeholder="Shorten your link (e.g. http://www.google.com)" autofocus>
+		<input type="submit" id="shortenButton" value="Shorten">
+	</form>	
 </div>
-<div>
-	<table id="URLTable">		
+<div id="urlTableBox">
+	<table id="urlTable">		
 		<thead>
 			<th>Tiny URL</th>
 			<th>Original URL</th>

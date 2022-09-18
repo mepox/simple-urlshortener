@@ -1,5 +1,6 @@
 function onStart() {
 	console.log("Page is ready.");
+	updateStatus("Ready.");
 	showURLs();
 }
 
@@ -16,7 +17,7 @@ function showURLs() {
 				// SUCCESS    	
 	        	var data = JSON.parse(this.responseText);	        	       	
 	        	
-	        	var tbody = document.getElementById("URLTable").getElementsByTagName("tbody")[0];
+	        	var tbody = document.getElementById("urlTable").getElementsByTagName("tbody")[0];
 	        	while(tbody.firstChild) {
 	        		tbody.removeChild(tbody.firstChild);
 	        	}
@@ -25,9 +26,11 @@ function showURLs() {
 	        	
 	        	var toAdd = "";        	
 				for (var i = 0; i < data.length; i++) {
-					toAdd += "<tr><td>" + tinyURL + data[i].key + "</td>" +				
-					"<td>" + data[i].url + "</td>" +
-					"<td><input type='button' class='copyButton rowButton' onclick='toClipboardRowButton(this)' value='Copy'> " +
+					toAdd += "<tr><td class='tinyUrl'>" + tinyURL + data[i].key + "</td>" +				
+					"<td class='originalUrl'>" + data[i].url + "</td>" +
+					"<td class='actions'>" +
+					"<input type='button' class='visitButton rowButton' onclick='visitRowButton(this)' value='Visit'> " +
+					"<input type='button' class='copyButton rowButton' onclick='copyRowButton(this)' value='Copy'> " +
 					"<input type='button' class='deleteButton rowButton' onclick='deleteURLRowButton(this)' value='Delete'></td></tr>";
 				}            
 				
@@ -62,7 +65,8 @@ function addURL() {
 			if (this.status == 200) {
 				// SUCCESS
 				var tinyURL = window.location + "u/" + this.responseText;
-				var copyButton = "<input type='button' class='copyButton rowButton' onclick=copyTextToClipboard('" + tinyURL + "') value='Copy'>";				
+				var copyButton = 	" <input type='button' class='visitButton rowButton' onclick=visit('" + tinyURL + "') value='Visit'> " +
+									"<input type='button' class='copyButton rowButton' onclick=copyTextToClipboard('" + tinyURL + "') value='Copy'>";				
 				var message = "New Short URL has been created: " + tinyURL + " " + copyButton;
 				
 				updateStatus(message);
@@ -76,6 +80,15 @@ function addURL() {
 	
 	// Clears the form	
 	document.forms["addURLForm"]["newURL"].value = "";
+}
+
+function visitRowButton(row) {
+	var tinyUrl = row.parentNode.parentNode.childNodes[0].firstChild.nodeValue;
+	visit(tinyUrl);
+}
+
+function visit(url) {
+	window.open(url, '_blank').focus();
 }
 
 function deleteURLRowButton(row) {
@@ -107,8 +120,9 @@ function deleteURLRowButton(row) {
 	}
 }
 
-function updateStatus(text) {
-	document.getElementById("statusText").innerHTML = text;	
+function copyRowButton(row) {
+	var tinyURL = row.parentNode.parentNode.childNodes[0].firstChild.nodeValue 
+	copyTextToClipboard(tinyURL);
 }
 
 function copyTextToClipboard(url) {	
@@ -117,12 +131,8 @@ function copyTextToClipboard(url) {
 	updateStatus(message);		
 }
 
-function toClipboardRowButton(row) {
-	var tinyURL = row.parentNode.parentNode.childNodes[0].firstChild.nodeValue 
-	navigator.clipboard.writeText(tinyURL);
-	
-	var message = tinyURL + " copied to the clipboard.";	
-	updateStatus(message);
+function updateStatus(text) {
+	document.getElementById("statusText").innerHTML = "<b>Status: </b>" + text;	
 }
 
 function isValidHttpUrl(url) {	

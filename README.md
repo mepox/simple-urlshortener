@@ -2,7 +2,7 @@
 
 A Simple URL Shortener service made with Spring Boot. 
 
-![Alt text](screenshot.jpg?raw=true "URL Shortener")
+![Alt text](screenshot.png?raw=true "URL Shortener")
 
 ## What's inside
 The project uses the following technologies:
