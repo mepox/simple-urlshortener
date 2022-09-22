@@ -6,9 +6,10 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.laszlojanku.spring.urlshortener.exception.KeyNotValidException;
 import com.laszlojanku.spring.urlshortener.exception.UrlNotFoundException;
@@ -16,7 +17,7 @@ import com.laszlojanku.spring.urlshortener.exception.UrlNotValidException;
 import com.laszlojanku.spring.urlshortener.model.TinyURL;
 import com.laszlojanku.spring.urlshortener.repository.JdbcTinyURLRepository;
 
-@SpringBootTest
+@ExtendWith(MockitoExtension.class)
 public class TinyURLServiceTest {
 	
 	@Mock
