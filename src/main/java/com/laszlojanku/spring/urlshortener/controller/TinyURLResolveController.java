@@ -18,7 +18,6 @@ import com.laszlojanku.spring.urlshortener.service.TinyURLService;
 /** 
  * REST Controller to resolve a TinyURL by key.
  */
-
 @RestController
 public class TinyURLResolveController {
 	
@@ -27,8 +26,8 @@ public class TinyURLResolveController {
 	
 	/**
 	 * Resolves a TinyURL using the key.
-	 * @param	key	the key of the TinyURL
-	 * @return		returns the original url or an error message
+	 * @param key	the key of the TinyURL
+	 * @return		the original url or an error message
 	 */	
 	@GetMapping("/u/{key}")
 	public ResponseEntity<String> getURL(@PathVariable("key") String strKey) {

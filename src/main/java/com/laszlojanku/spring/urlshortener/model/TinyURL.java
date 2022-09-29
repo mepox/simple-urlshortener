@@ -3,7 +3,6 @@ package com.laszlojanku.spring.urlshortener.model;
 /** 
  * Represent a TinyURL.
  */
-
 public class TinyURL {	
 	private String url;	
 	private String key;	

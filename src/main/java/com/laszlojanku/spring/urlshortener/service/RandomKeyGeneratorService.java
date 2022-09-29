@@ -10,7 +10,6 @@ import com.laszlojanku.spring.urlshortener.repository.JdbcTinyURLRepository;
 /**
  * Generate a random key from characters [a-z, A-Z, 0-9].
  */
-
 @Service
 public class RandomKeyGeneratorService implements KeyGeneratorService {
 	

@@ -12,7 +12,6 @@ import com.laszlojanku.spring.urlshortener.model.TinyURL;
  * 
  * Stores the TinyURLs in an ArrayList. Used for prototyping.
  */
-
 @Repository
 public class ArrayListTinyURLRepository implements TinyURLRepository {
 	
@@ -20,6 +19,7 @@ public class ArrayListTinyURLRepository implements TinyURLRepository {
 
 	/**
 	 * Adds a TinyURL to the ArrayList.
+	 * 
 	 * @param tinyURL	the TinyURL to be added	 				
 	 */
 	@Override
@@ -29,6 +29,7 @@ public class ArrayListTinyURLRepository implements TinyURLRepository {
 	
 	/**
 	 * Deletes a TinyURL from the ArrayList.
+	 * 
 	 * @param key	the key of the TinyURL
 	 * @return 		true if successful
 	 */
@@ -63,6 +64,7 @@ public class ArrayListTinyURLRepository implements TinyURLRepository {
 	
 	/**
 	 * Finds and returns the TinyURL by key.
+	 * 
 	 * @param key	the key of the TinyURL
 	 * @return 		the TinyURL or null if not found
 	 */
@@ -79,6 +81,7 @@ public class ArrayListTinyURLRepository implements TinyURLRepository {
 	
 	/**
 	 * Checks if the key is exists in the ArrayList.
+	 * 
 	 * @param key	the key of the TinyURL
 	 * @return		true if found
 	 */	

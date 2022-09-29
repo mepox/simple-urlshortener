@@ -19,7 +19,6 @@ import com.laszlojanku.spring.urlshortener.service.TinyURLService;
 /**
  * Responsible to handle the main page's REST API requests.
  */
-
 @RestController
 public class HomeController {
 	
@@ -27,7 +26,8 @@ public class HomeController {
 	private TinyURLService tinyURLService;
 	
 	/**
-	 * Handles the client POST requests to add a new url.	
+	 * Handles the client's POST requests to add and shorten a new url.	
+	 * 
 	 * @param url	the new url to be added
 	 * @return 		the key for the new url or an error message
 	 */
@@ -44,7 +44,8 @@ public class HomeController {
 	}
 	
 	/**
-	 * Handles the client DELETE requests to delete an url.
+	 * Handles the client's DELETE requests to delete an url.
+	 * 
 	 * @param key	the key of the url to be deleted
 	 * @return		a status message with the result   
 	 */	
@@ -61,9 +62,9 @@ public class HomeController {
 	}
 	
 	/**
-	 * Handles the client GET requests to get all the TinyURL.
+	 * Handles the client's GET requests to get all the TinyURLs.
 	 * 
-	 * @return	a list of all the TinyURL
+	 * @return	a list of all the TinyURLs in String
 	 */
 	@GetMapping("/urls/all")
 	public ResponseEntity<String> getAllURLs() {

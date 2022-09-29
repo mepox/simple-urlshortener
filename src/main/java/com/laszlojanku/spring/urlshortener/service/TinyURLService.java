@@ -20,7 +20,6 @@ import com.laszlojanku.spring.urlshortener.repository.JdbcTinyURLRepository;
 /** 
  * Provides a Service to manipulate the TinyURLs.
  */
-
 @Service
 public class TinyURLService {
 		
@@ -49,9 +48,9 @@ public class TinyURLService {
 	/**
 	 * Deletes the TinyURL from the database using the key.
 	 * @param strKey	the key of the TinyURL in String	 
-	 * @throws KeyNotFoundException 
-	 * @throws KeyNotValidException
-	 * @throws JdbcException
+	 * @throws 			KeyNotFoundException 
+	 * @throws 			KeyNotValidException
+	 * @throws 			JdbcException
 	 */	
 	public void deleteURL(String strKey) throws KeyNotValidException, KeyNotFoundException, JdbcException {	
 		if (!keyGeneratorService.isValid(strKey)) {
@@ -74,7 +73,7 @@ public class TinyURLService {
 	/**
 	 * Returns a List of all TinyURLs.
 	 * @return		the list of TinyURLs	
-	 * @throws JdbcException 
+	 * @throws 		JdbcException 
 	 */	
 	public List<TinyURL> getAll() throws JdbcException {		
 		List<TinyURL> tinyURLs = null;
@@ -90,11 +89,11 @@ public class TinyURLService {
 	
 	/**
 	 * Finds and returns an URL by key.
-	 * @param	key	the key of the TinyURL
-	 * @return	url	the URL or returns null if not found	
-	 * @throws KeyNotValidException 
-	 * @throws UrlNotFoundException 
-	 * @throws JdbcException
+	 * @param key	the key of the TinyURL
+	 * @return		the URL or returns null if not found	
+	 * @throws 		KeyNotValidException 
+	 * @throws 		UrlNotFoundException 
+	 * @throws 		JdbcException
 	 */	
 	public String getURL(String strKey) throws KeyNotValidException, UrlNotFoundException, JdbcException {
 		if (!keyGeneratorService.isValid(strKey)) {
@@ -118,10 +117,10 @@ public class TinyURLService {
 	
 	/**
 	 * Adds the url to the database and returns it's key.
-	 * @param	url	the url to be added
+	 * @param url	the url to be added
 	 * @return		the key for the new TinyURL	
-	 * @throws UrlNotValidException 
-	 * @throws JdbcException
+	 * @throws 		UrlNotValidException 
+	 * @throws 		JdbcException
 	 */	
 	public String addURL(String url) throws UrlNotValidException, JdbcException {		
 		// Check if the URL is valid

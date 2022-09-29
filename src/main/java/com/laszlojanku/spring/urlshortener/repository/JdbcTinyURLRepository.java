@@ -14,7 +14,6 @@ import com.laszlojanku.spring.urlshortener.model.TinyURL;
 /** 
  * Repository using JdbcTemplate to access the database.
  */
-
 @Repository
 public class JdbcTinyURLRepository implements TinyURLRepository {
 	
@@ -23,6 +22,7 @@ public class JdbcTinyURLRepository implements TinyURLRepository {
 	
 	/**
 	 * Adds a TinyURL to the database using JdbcTemplate.
+	 * 
 	 * @param tinyURL	the TinyURL to be added
 	 * @throws 			DataAccessException if there is any problem using JdbcTemplate 				
 	 */
@@ -34,7 +34,8 @@ public class JdbcTinyURLRepository implements TinyURLRepository {
 	}
 	
 	/**
-	 * Deletes a TinyURL from the database using JdbcTemplate
+	 * Deletes a TinyURL from the database using JdbcTemplate.
+	 * 
 	 * @param key	the key of the TinyURL
 	 * @return 		true if successful or false if not found
 	 * @throws		DataAccessException if there is any problem using JdbcTemplate
@@ -55,6 +56,7 @@ public class JdbcTinyURLRepository implements TinyURLRepository {
 	
 	/**
 	 * Returns a List of all the TinyURLs.
+	 * 
 	 * @return		null if empty
 	 * @throws		DataAccessException if there is any problem using JdbcTemplate
 	 */
@@ -93,6 +95,7 @@ public class JdbcTinyURLRepository implements TinyURLRepository {
 	
 	/**
 	 * Finds and returns a TinyURL using a key.
+	 * 
 	 * @param key	the key of the TinyURL
 	 * @return 		a TinyURL or returns null if not found
 	 * @throws 		DataAccessException if there is any problem using JdbcTemplate
@@ -113,6 +116,7 @@ public class JdbcTinyURLRepository implements TinyURLRepository {
 	
 	/**
 	 * Checks if the key is found in the database.
+	 * 
 	 * @param key	the key of the TinyURL
 	 * @return		true if found
 	 * @throws		DataAccessException if there is any problem using JdbcTemplate
