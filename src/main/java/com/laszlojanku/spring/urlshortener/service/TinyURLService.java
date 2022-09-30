@@ -3,12 +3,9 @@ package com.laszlojanku.spring.urlshortener.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.event.ApplicationReadyEvent;
-import org.springframework.context.event.EventListener;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
-import com.laszlojanku.spring.urlshortener.UrlShortenerApplication;
 import com.laszlojanku.spring.urlshortener.exception.JdbcException;
 import com.laszlojanku.spring.urlshortener.exception.KeyNotFoundException;
 import com.laszlojanku.spring.urlshortener.exception.KeyNotValidException;
@@ -30,20 +27,7 @@ public class TinyURLService {
 	private RandomKeyGeneratorService keyGeneratorService;
 	
 	@Autowired
-	private UrlValidatorService urlValidatorService;	
-
-	@EventListener(ApplicationReadyEvent.class)
-	private void addSomeUrlAfterStartup() {
-		// Creates a few default TinyURLs
-		try {
-			addURL("http://www.google.com");
-			addURL("http://www.bing.com");
-			addURL("http://www.yahoo.com");
-			addURL("http://www.facebook.com");
-		} catch (Exception e) {
-			UrlShortenerApplication.logger.warn(e.getMessage());
-		}
-	}
+	private UrlValidatorService urlValidatorService;
 	
 	/**
 	 * Deletes the TinyURL from the database using the key.
