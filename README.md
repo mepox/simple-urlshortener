@@ -28,6 +28,8 @@ The main components of the service are:
 ## Installation 
 The project is created with Maven, so you just need to import it to your IDE and build the project to resolve the dependencies.
 
+Alternatively, you can start the project with: `mvnw spring-boot:run`
+
 ## Live Preview
 The app is hosted on Heroku: https://spring-urlshortener.herokuapp.com/
 
