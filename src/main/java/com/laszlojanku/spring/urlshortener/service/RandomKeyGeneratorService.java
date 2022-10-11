@@ -14,10 +14,16 @@ import com.laszlojanku.spring.urlshortener.repository.JdbcTinyURLRepository;
 public class RandomKeyGeneratorService implements KeyGeneratorService {
 	
 	private final String SEED = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"; // 62
-	private final int KEY_LENGTH = 4; // Length of the key
+	private final int KEY_LENGTH = 4; // Length of the key	
+	
+	private JdbcTinyURLRepository repository;
+	private Random rand;
 	
 	@Autowired
-	private JdbcTinyURLRepository repository;
+	public RandomKeyGeneratorService(JdbcTinyURLRepository repository) {
+		this.repository = repository;
+		rand = new Random();
+	}
 
 	@Override
 	public String getKey() {
@@ -28,15 +34,14 @@ public class RandomKeyGeneratorService implements KeyGeneratorService {
 		String key = "";
 		
 		do {
-			key = random(KEY_LENGTH);
+			key = getRandomKey(KEY_LENGTH);
 		} while (repository.isExists(key));
 		
 		return key;
 	}
 	
-	private String random(int length) {
-		StringBuilder sb = new StringBuilder();
-		Random rand = new Random();
+	private String getRandomKey(int length) {
+		StringBuilder sb = new StringBuilder();		
 		
 		for (int i = 0; i < length; i++) {
 			int index = rand.nextInt(62);

@@ -88,9 +88,7 @@ public class JdbcTinyURLRepository implements TinyURLRepository {
 		String key = (String) row.get("tinyurl_key");
 		String url = (String) row.get("url");
 		
-		TinyURL tinyURL = new TinyURL(key, url);
-		
-		return tinyURL;
+		return new TinyURL(key, url);
 	}
 	
 	/**
@@ -127,7 +125,7 @@ public class JdbcTinyURLRepository implements TinyURLRepository {
 		
 		int count = jdbc.queryForObject(sql, Integer.class, key);
 		
-		return (count > 0) ? true : false;
+		return (count > 0);
 	}
 
 }
