@@ -8,12 +8,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class SimpleKeyGeneratorService implements KeyGeneratorService {
 	
-	private int key = 1000;
+	private int currentKey = 1000;
 
 	@Override
 	public String getKey() {				
-		String newKey = Integer.toString(key);
-		key++;
+		String newKey = Integer.toString(currentKey);
+		currentKey++;
 		return newKey;
 	}
 
@@ -25,13 +25,9 @@ public class SimpleKeyGeneratorService implements KeyGeneratorService {
 			key = Integer.parseInt(strKey);
 		} catch (NumberFormatException e) {
 			return false;
-		}
+		}		
 		
-		if (key < 1000) {
-			return false;
-		}
-		
-		return true;
+		return (key < 1000);
 	}
 
 }

@@ -18,7 +18,7 @@ import com.laszlojanku.spring.urlshortener.model.TinyURL;
 import com.laszlojanku.spring.urlshortener.repository.JdbcTinyURLRepository;
 
 @ExtendWith(MockitoExtension.class)
-public class TinyURLServiceTest {
+class TinyURLServiceTest {
 	
 	@Mock
 	private JdbcTinyURLRepository repository;
@@ -33,21 +33,21 @@ public class TinyURLServiceTest {
 	private TinyURLService tinyURLService;
 	
 	@Test
-	public void addURL_WhenValid_ShouldntThrowException() {
+	void addURL_WhenValid_ShouldntThrowException() {
 		when(urlValidatorService.isValid(anyString())).thenReturn(true);
 		
 		assertDoesNotThrow(() -> tinyURLService.addURL(anyString()));		
 	}
 	
 	@Test
-	public void addURL_WhenInvalid_ShouldThrowException() {
+	void addURL_WhenInvalid_ShouldThrowException() {
 		when(urlValidatorService.isValid(anyString())).thenReturn(false);
 		
 		assertThrows(UrlNotValidException.class, () -> tinyURLService.addURL(anyString()));
 	}
 	
 	@Test
-	public void getURL_WhenFound_ShouldntThrowException() throws Exception {
+	void getURL_WhenFound_ShouldntThrowException() throws Exception {
 		String key = "123";
 		
 		when(keyGeneratorService.isValid(key)).thenReturn(true);
@@ -57,7 +57,7 @@ public class TinyURLServiceTest {
 	}
 	
 	@Test
-	public void getURL_WhenNotFound_ShouldThrowException() {	
+	void getURL_WhenNotFound_ShouldThrowException() {	
 		when(keyGeneratorService.isValid(anyString())).thenReturn(true);
 		when(repository.getTinyURL(anyString())).thenReturn(null);
 		
@@ -65,7 +65,7 @@ public class TinyURLServiceTest {
 	}
 	
 	@Test
-	public void getURL_WhenKeyNotValid_ShouldThrowException() {
+	void getURL_WhenKeyNotValid_ShouldThrowException() {
 		when(keyGeneratorService.isValid(anyString())).thenReturn(false);
 		
 		assertThrows(KeyNotValidException.class, () -> tinyURLService.getURL(anyString()));

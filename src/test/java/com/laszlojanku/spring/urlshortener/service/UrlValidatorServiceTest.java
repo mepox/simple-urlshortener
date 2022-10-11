@@ -9,13 +9,13 @@ import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
-public class UrlValidatorServiceTest {
+class UrlValidatorServiceTest {
 
 	@InjectMocks
 	private UrlValidatorService urlValidatorService;
 	
 	@Test
-	public void isValid_WhenValidUrl_ShouldReturnTrue() {
+	void isValid_WhenValidUrl_ShouldReturnTrue() {
 		String url = "http://www.google.com";
 		
 		boolean actual = urlValidatorService.isValid(url);
@@ -24,7 +24,7 @@ public class UrlValidatorServiceTest {
 	}
 	
 	@Test
-	public void isValid_WhenHttpIsMissing_ShouldReturnFalse() {
+	void isValid_WhenHttpIsMissing_ShouldReturnFalse() {
 		String url = "www.google.com";
 		
 		boolean actual = urlValidatorService.isValid(url);
@@ -33,7 +33,7 @@ public class UrlValidatorServiceTest {
 	}
 	
 	@Test
-	public void isValid_WhenOneWord_ShouldReturnFalse() {
+	void isValid_WhenOneWord_ShouldReturnFalse() {
 		String url = "google";
 		
 		boolean actual = urlValidatorService.isValid(url);
@@ -42,7 +42,7 @@ public class UrlValidatorServiceTest {
 	}
 	
 	@Test
-	public void isValid_WhenNull_ShouldReturnFalse() {
+	void isValid_WhenNull_ShouldReturnFalse() {
 		String url = null;
 		
 		boolean actual = urlValidatorService.isValid(url);
@@ -51,7 +51,7 @@ public class UrlValidatorServiceTest {
 	}
 	
 	@Test
-	public void isValid_WhenEmpty_ShouldReturnFalse() {
+	void isValid_WhenEmpty_ShouldReturnFalse() {
 		String url = "";
 		
 		boolean actual = urlValidatorService.isValid(url);
